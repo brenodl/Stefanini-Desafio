@@ -19,7 +19,7 @@ stefanini.controller('dueloController', ['$scope', '$state', '$cookieStore', 'ut
 			$scope.visibleMessage = true;
 			$scope.cssMessage = "message-table-correct";
 			dueloService.getDuelo(util.getUri()).success(function(data, status, headers, config) {
-				$scope.herois = data;
+				$scope.herois.push(data);
 				$scope.visibleMessage = false;
 			}).error(function(data, status, headers, config) {
 				$scope.messages = data.message;

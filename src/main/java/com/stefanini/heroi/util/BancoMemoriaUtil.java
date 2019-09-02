@@ -8,8 +8,8 @@ import com.stefanini.heroi.dto.PoderesDto;
 
 public class BancoMemoriaUtil {
 	
-	public static List<PoderesDto> poderesDtos;	
-	public static List<PersonagemDto> personagemDtos;
+	private static List<PoderesDto> poderesDtos;	
+	private static List<PersonagemDto> personagemDtos;
 
 	
 	public static BancoMemoriaUtil getInstance(){

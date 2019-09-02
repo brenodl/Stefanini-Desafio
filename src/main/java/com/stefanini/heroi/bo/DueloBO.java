@@ -10,6 +10,7 @@ import java.util.Random;
 import com.stefanini.heroi.dto.DueloDto;
 import com.stefanini.heroi.dto.PartidaDto;
 import com.stefanini.heroi.dto.PersonagemDto;
+import com.stefanini.heroi.util.PersonagemUtil;
 
 /**
  * Classe responsável pelos duelos
@@ -22,17 +23,17 @@ public class DueloBO {
 	
 	private Integer x[] = new Integer[2];
 	private PartidaDto partida;
-	private List<PersonagemDto> jogadoresData = PersonagemBO.getJogadoresData();
+	private List<PersonagemDto> jogadoresData;
 	Integer qtdDuelos = 0;
 	private List<DueloDto> historicoDuelos = new ArrayList<>();
-	
+	Random random = new Random();
 	public DueloBO() {
 		
 		partida = new PartidaDto();
-		
+		jogadoresData = PersonagemBO.getJogadoresData();
 	}
 	
-	public List<DueloDto> criaDuelo() throws IOException {
+	public DueloDto criaDuelo() {
 		
 		List<PersonagemDto> herois;
 		List<String> keyPoderes = Arrays.asList("inteligencia", "forca", "defesa", "destreza", "poder", "combate");
@@ -69,7 +70,7 @@ public class DueloBO {
 		partida.setDuelos(duelo);
 		
 		qtdDuelos++;
-		return partida.getDuelos();
+		return duelo;
 	}
 	
 	public List<DueloDto> getHistorico() {
@@ -81,7 +82,7 @@ public class DueloBO {
 
 		if (partida.getDuelos().isEmpty()) {
 			List<PersonagemDto> herois = null;
-			Random random = new Random();
+			
 			boolean ok = true;
 
 			while (x[0] == x[1] || ok) {
@@ -99,11 +100,10 @@ public class DueloBO {
 			PersonagemDto ganhadorDueloAnterior = partida.getDuelos().get(partida.getDuelos().size() - 1).getGanhador();
 			List<PersonagemDto> herois = null;
 
-			Random random = new Random();
 			Integer x1 = null;
 			boolean ok = true;
 
-			while (ganhadorDueloAnterior.getId() == x1 || ok) {
+			while (ganhadorDueloAnterior.getId().equals(x1) || ok) {
 				
 				x1 = random.nextInt(jogadoresData.size());
 				if (!ganhadorDueloAnterior.getAlinhamento().equals(jogadoresData.get(x1).getAlinhamento()))
@@ -120,8 +120,8 @@ public class DueloBO {
 	
 	public List<PersonagemDto> getVencedores() {
 		
-		List<PersonagemDto> herois = new ArrayList<PersonagemDto>();
-		List<PersonagemDto> herois1 = new ArrayList<PersonagemDto>();
+		List<PersonagemDto> herois = new ArrayList<>();
+		List<PersonagemDto> herois1 = new ArrayList<>();
 		String nomeAnt = " ";
 		int cont = 0;
 		for(DueloDto x : partida.getDuelos()) {
@@ -145,6 +145,11 @@ public class DueloBO {
 	public void novoDuelo() {
 		
 		partida = new PartidaDto();
+		try {
+			jogadoresData = new PersonagemUtil().carregaCSV();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 public PersonagemDto getMutante() {

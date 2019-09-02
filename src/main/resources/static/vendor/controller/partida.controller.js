@@ -2,7 +2,7 @@
  * Controller para add face group
  */
 stefanini.controller('partidaController', ['$scope', '$state', '$cookieStore', 'util', '$http', 'partidaService',
-	function ($scope, $state, $cookieStore, util, $http, partidaService) {
+	function ($scope, $state, $cookieStore, util, $http, partidaService, $anchorScroll) {
 
 		$scope.messages = "";
 		$scope.cssMessage = "";
@@ -22,16 +22,13 @@ stefanini.controller('partidaController', ['$scope', '$state', '$cookieStore', '
 		}
 		resetar();
 
-		$scope.collapse = function () {
-			$scope.visibleCollapse = !$scope.visibleCollapse;
-		}
 		$scope.duelar = function () {
 			$scope.messages = "Aguarde que estamos processando...";
 			$scope.visibleMessage = true;
 			$scope.cssMessage = "message-table-correct";
 			partidaService.getHerois(util.getUri()).success(function (data, status, headers, config) {
 				++$scope.qtdDuelos;
-				$scope.herois = data;
+				$scope.herois.push(data);
 				console.log($scope.herois);
 				$scope.visibleMessage = false;
 			}).error(function (data, status, headers, config) {

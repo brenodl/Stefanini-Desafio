@@ -9,9 +9,9 @@
 				<div ng-class="cssMessage" ng-show="visibleMessage">{{messages}}</div>
 			</div>
 			<div class="container">
-				<div ng-repeat="heroi in herois">
+				<div ng-repeat="heroi in herois track by $index">
 					<br>
-					<b>PARTIDA {{qtdDuelos}}</b>
+					<b>PARTIDA {{$index+1}}</b>
 					<br>
 					<p class="text-center"><b>Habilidade Sorteada: {{heroi.forca}}</b></p>
 					<div class="row">
@@ -40,7 +40,7 @@
 				</div>
 				<div ng-show="visibleBotaoDuelo">
 					<div class="w-75 p-3 center">
-						<button type="button" class="btn btn-dark btn-lg btn-block" ng-click="duelar()">Duelar</button>
+						<button type="button" id="button" class="btn btn-dark btn-lg btn-block" ng-click="duelar()">Duelar</button>
 					</div>
 				</div>
 
