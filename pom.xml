@@ -16,6 +16,7 @@
         <spring.version>4.2.5.RELEASE</spring.version>
         <spring.boot.version>1.1.12.RELEASE</spring.boot.version>
         <hbase.version>1.4.4</hbase.version>
+		<maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <parent>
@@ -92,6 +93,19 @@
 
     <build>
         <plugins>
+		<plugin>    
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+        </configuration>
+    </plugin>
+	
+	 <plugin>
+        <groupId>com.heroku.sdk</groupId>
+        <artifactId>heroku-maven-plugin</artifactId>
+        <version>2.0.13</version>
+      </plugin>
             <!--Copy the static web resources to the webapp directory for weblogic deployment-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
