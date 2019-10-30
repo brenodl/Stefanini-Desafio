@@ -1,9 +1,9 @@
 package com.stefanini.heroi.util;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import com.stefanini.heroi.dto.PersonagemDto;
 public class PersonagemUtil {
 	
 	//Variáveis final
-	final String arquivo = "C:\\Develop\\git\\Stefanini\\stefaninimarveldc\\stefanini\\src\\main\\java\\com\\stefanini\\heroi\\controller\\charcters_stats.csv";
+	final InputStream inputStream = getClass().getClassLoader().getResourceAsStream("com/stefanini/heroi/controller/charcters_stats.csv");
 	
 	public PersonagemUtil(){
 		
@@ -22,7 +22,7 @@ public class PersonagemUtil {
 	
 	public List<PersonagemDto> carregaCSV() throws IOException{
 		List<PersonagemDto> personagemDtos = new ArrayList<PersonagemDto>();
-		Reader reader = Files.newBufferedReader(Paths.get(arquivo));
+		Reader reader = new InputStreamReader(inputStream);
 		CSVReader leitor = new CSVReaderBuilder(reader).withSkipLines(1).build();
 		List<String[]> csv = leitor.readAll();
 		Integer count = 0;
