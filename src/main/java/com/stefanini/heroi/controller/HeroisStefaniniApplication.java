@@ -1,8 +1,5 @@
 package com.stefanini.heroi.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -24,12 +21,7 @@ public class HeroisStefaniniApplication extends SpringBootServletInitializer imp
 
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
-		SpringApplication application = new SpringApplication(HeroisStefaniniApplication.class);
-		Map<String, Object> map = new HashMap<>();
-		map.put("server.contextPath", "/heroi-stefanini");
-		map.put("server.port", "8585");
-		application.setDefaultProperties(map);
-		application.run(args);
+		SpringApplication.run(HeroisStefaniniApplication.class, args);
 	}
 
 	@Override

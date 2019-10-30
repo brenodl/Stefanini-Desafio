@@ -1,7 +1,7 @@
 stefanini.service('util', ['$http', 
                                 function($http){
 	
-	var uri = 'http://' + window.location.host + '/heroi-stefanini';
+	var uri = 'http://' + window.location.host;
 	
 	/**
 	 * Method uri return
